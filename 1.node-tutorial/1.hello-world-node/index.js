@@ -8,3 +8,4 @@ setTimeout(()=>{
 },2000)
 
 console.log('This message is last line of the sync code')
+
