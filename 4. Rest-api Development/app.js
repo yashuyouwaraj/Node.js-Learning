@@ -39,18 +39,18 @@ app.get("/get/:id",(req,res)=>{
 })
 
 //add a new book
-app.post("/add",(req,res)=>{
-    const newBook={
-        id:books.length+1,
-        title:`Book ${books.length+1}`
-    }
+app.post("/add", (req, res) => {
+  const newBook = {
+    id: Math.floor(Math.random() * 1000).toString(),
+    title: `Book ${Math.floor(Math.random() * 1000)}`,
+  };
 
-    books.push(newBook)
-    res.status(200).json({
-        data:newBook,
-        message:"New book is added successfully"
-    })
-})
+  books.push(newBook);
+  res.status(200).json({
+    data: newBook,
+    message: "New book is added successfully",
+  });
+});
 
 //update a book
 app.put("/update/:id",(req,res)=>{
