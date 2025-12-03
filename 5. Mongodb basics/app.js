@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb+srv://amanyasu:Iamking123@cluster0.ofafujx.mongodb.net/")
+  .connect("mongodb+srv://amanyasu:<db-password>@cluster0.ofafujx.mongodb.net/")
   .then(() => console.log("database connected successfully"))
   .catch((e) => console.log(e));
 
