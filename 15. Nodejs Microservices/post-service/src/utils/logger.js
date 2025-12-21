@@ -5,7 +5,6 @@ const logger = winston.createLogger({
     format:winston.format.combine(
         winston.format.timestamp(),
         winston.format.errors({stack:true}),
-        winston.format.splat(),
         winston.format.json()
     ),
     defaultMeta:{service:"post-service"},
@@ -13,7 +12,13 @@ const logger = winston.createLogger({
         new winston.transports.Console({
             format:winston.format.combine(
                 winston.format.colorize(),
-                winston.format.simple()
+                winston.format.printf(({ level, message, timestamp, ...meta }) => {
+                    let metaStr = '';
+                    if (Object.keys(meta).length > 0) {
+                        metaStr = JSON.stringify(meta);
+                    }
+                    return `${timestamp} [${level}]: ${message} ${metaStr}`;
+                })
             ),
         }),
         new winston.transports.File({filename:"error.log",level:"error"}),

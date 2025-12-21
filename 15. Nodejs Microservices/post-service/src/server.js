@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const postRoutes = require("./routes/post-routes");
 const errorHandler = require("./middleware/errorHandler");
 const logger = require("./utils/logger");
+const { connectToRabbitMQ } = require("./utils/rabbitmq");
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -30,17 +31,8 @@ app.use((req, res, next) => {
   next();
 });
 
-//routes -> pass redisclient to routes
-app.use(
-  "/api/posts",
-  (req, res, next) => {
-    req.redisClient = redisClient;
-    next();
-  },
-  postRoutes
-);
+//*** Homework - implement Ip based rate limiting for sensitive endpoints
 
-app.use(errorHandler)
 //routes -> pass redisclient to routes
 app.use(
   "/api/posts",
@@ -55,15 +47,19 @@ app.use(errorHandler);
 
 async function startServer() {
   try {
+    await connectToRabbitMQ();
     app.listen(PORT, () => {
       logger.info(`Post service running on port ${PORT}`);
     });
   } catch (error) {
     logger.error("Failed to connect to server", error);
+    process.exit(1);
   }
 }
 
 startServer();
+
+//unhandled promise rejection
 
 process.on("unhandledRejection", (reason, promise) => {
   logger.error("Unhandled Rejection at", promise, "reason:", reason);

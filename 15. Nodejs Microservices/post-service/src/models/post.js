@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+
 const postSchema = new mongoose.Schema(
   {
     user: {
@@ -20,12 +21,11 @@ const postSchema = new mongoose.Schema(
       default: Date.now,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 postSchema.index({ content: "text" });
+
 const Post = mongoose.model("Post", postSchema);
 
-module.exports=Post
+module.exports = Post;
