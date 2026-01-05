@@ -1,9 +1,9 @@
 # use the official node.js 18 image with alpine linux as the base image
 
-FROM node:19-apline
+FROM node:19-alpine
 
 # set the working directory inside the container
-WORKDIR /use/src/app
+WORKDIR /usr/src/app
 
 # copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 3003
 
 # start the application
-CMD ["node", "server.js"]
+CMD ["node", "src/server.js"]
