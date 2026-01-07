@@ -1,5 +1,6 @@
 const {createUsersTable, insertUser, fetchAllUsers, updateUserInfo, deleteInfo} = require("./concepts/basic-queries")
 const { getUsersWhere, getSortedUsers, getPaginatedUsers } = require("./concepts/filtering-sorting")
+const { createPostsTable, insertNewPost } = require("./concepts/relationships")
 
 //test basic queries
 
@@ -33,11 +34,11 @@ async function testBasicQueries() {
 async function testFilterAndSortQueries() {
     try {
         //get users with a username whose username starting with z
-        // const userStartingWith= await getUsersWhere("username LIKE 'A%'")
-        // console.log(userStartingWith);
+        const userStartingWith= await getUsersWhere("username LIKE 'A%'")
+        console.log(userStartingWith);
 
-        // const sortedUsers = await getSortedUsers("created_at","DESC")
-        // console.log(sortedUsers);
+        const sortedUsers = await getSortedUsers("created_at","DESC")
+        console.log(sortedUsers);
 
         const paginatedUsers = await getPaginatedUsers(2,1)
         console.log(paginatedUsers);
@@ -47,9 +48,22 @@ async function testFilterAndSortQueries() {
     }
 }
 
+async function testRelationshipQueries() {
+    try {
+        // await createPostsTable()
+        await insertNewPost('First Post','This is the content of the first post',2)
+        await insertNewPost('Second Post','This is the content of the second post',3)
+        await insertNewPost('Third Post','This is the content of the Third post',4)
+    } catch (e) {
+        console.log("Error in relationship queries",e);
+        
+    }
+}
+
 async function testAllQueries() {
     // await testBasicQueries()
-    testFilterAndSortQueries()
+    // await testFilterAndSortQueries()
+    await testRelationshipQueries()
 }
 
 testAllQueries()
