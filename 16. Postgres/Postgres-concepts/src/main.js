@@ -1,3 +1,4 @@
+const { countPostsByUser, averagePostsPerUser } = require("./concepts/aggregation")
 const {createUsersTable, insertUser, fetchAllUsers, updateUserInfo, deleteInfo} = require("./concepts/basic-queries")
 const { getUsersWhere, getSortedUsers, getPaginatedUsers } = require("./concepts/filtering-sorting")
 const { getUsersWithPosts, getAllUsersAndTheirPosts } = require("./concepts/joins")
@@ -72,11 +73,25 @@ async function testJoinQueries() {
     }
 }
 
+async function testAggregateQueries() {
+    try {
+        // const postCount = await countPostsByUser()
+        // console.log(postCount);
+        const averagePostsPerUserInfo = await averagePostsPerUser()
+        console.log(averagePostsPerUserInfo);
+        
+    } catch (error) {
+        console.log("Error in aggregate queries",error);
+        
+    }
+}
+
 async function testAllQueries() {
     // await testBasicQueries()
     // await testFilterAndSortQueries()
     // await testRelationshipQueries()
-    await testJoinQueries()
+    // await testJoinQueries()
+    await testAggregateQueries()
 }
 
 testAllQueries()
