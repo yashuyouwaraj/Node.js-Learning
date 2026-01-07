@@ -1,5 +1,6 @@
 const {createUsersTable, insertUser, fetchAllUsers, updateUserInfo, deleteInfo} = require("./concepts/basic-queries")
 const { getUsersWhere, getSortedUsers, getPaginatedUsers } = require("./concepts/filtering-sorting")
+const { getUsersWithPosts, getAllUsersAndTheirPosts } = require("./concepts/joins")
 const { createPostsTable, insertNewPost } = require("./concepts/relationships")
 
 //test basic queries
@@ -60,10 +61,22 @@ async function testRelationshipQueries() {
     }
 }
 
+async function testJoinQueries() {
+    try {
+        const usersWithPosts = await getUsersWithPosts()
+        console.log(usersWithPosts);
+        const allUsersAndTheirPosts = await getAllUsersAndTheirPosts()
+        console.log(allUsersAndTheirPosts);
+    } catch (e) {
+        console.log("Error in join queries",e);
+    }
+}
+
 async function testAllQueries() {
     // await testBasicQueries()
     // await testFilterAndSortQueries()
-    await testRelationshipQueries()
+    // await testRelationshipQueries()
+    await testJoinQueries()
 }
 
 testAllQueries()
