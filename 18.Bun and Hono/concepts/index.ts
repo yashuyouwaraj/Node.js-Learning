@@ -2,4 +2,5 @@
 
 // import "./features/fs.ts"
 // import "./features/binary.ts"
-import "./features/meta-env.ts"
+// import "./features/meta-env.ts"
+import "./features/fetch.ts"
