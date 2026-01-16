@@ -5,4 +5,5 @@
 // import "./features/meta-env.ts"
 // import "./features/fetch.ts"
 // import "./features/server"
-import "./features/hashing.ts"
+// import "./features/hashing.ts"
+import "./features/sqlite.ts"
