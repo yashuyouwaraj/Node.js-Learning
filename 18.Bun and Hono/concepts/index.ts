@@ -4,4 +4,5 @@
 // import "./features/binary.ts"
 // import "./features/meta-env.ts"
 // import "./features/fetch.ts"
-import "./features/server"
+// import "./features/server"
+import "./features/hashing.ts"
