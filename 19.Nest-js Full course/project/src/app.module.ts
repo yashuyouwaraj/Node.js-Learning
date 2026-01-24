@@ -10,6 +10,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ConfigModule } from '@nestjs/config';
 import { FileUploadModule } from './file-upload/file-upload.module';
+import {File as FileEntity} from './file-upload/entities/file.entity'
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { FileUploadModule } from './file-upload/file-upload.module';
       username:'postgres',
       password:"1947",
       database:"Nest-js",
-      entities:[Post,User], // array of enities that u want to register
+      entities:[Post,User,FileEntity], // array of enities that u want to register
       synchronize:true // dev mode
     }),
     PostsModule,
