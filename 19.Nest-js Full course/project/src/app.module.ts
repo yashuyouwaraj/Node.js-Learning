@@ -11,6 +11,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { ConfigModule } from '@nestjs/config';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import {File as FileEntity} from './file-upload/entities/file.entity'
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import {File as FileEntity} from './file-upload/entities/file.entity'
     }),
     PostsModule,
     AuthModule,
-    FileUploadModule],
+    FileUploadModule,
+    EventsModule],
   controllers: [AppController],
   providers: [AppService],
 })
