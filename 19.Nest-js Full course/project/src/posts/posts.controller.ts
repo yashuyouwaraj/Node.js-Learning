@@ -9,14 +9,16 @@ import { CurrentUser } from 'src/auth/decorators/current-user.decorators';
 import { Roles } from 'src/auth/decorators/roles.decorators';
 import { UserRole } from 'src/auth/entities/user.entity';
 import { RolesGuard } from 'src/auth/guards/roles-guard';
+import { FindPostQueryDto } from './dto/find-posts-query-dto';
+import { PaginatedResponse } from 'src/common/interface/paginated-response.interface';
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Get()
-  async findAll():Promise<PostEntity[]>{
-    return this.postsService.findAll()
+  async findAll(@Query() query:FindPostQueryDto):Promise<PaginatedResponse<PostEntity>>{
+    return this.postsService.findAll(query)
   }
 
   @Get(':id')
